@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionHub - Online Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+            transition: all 0.3s ease; /* Smoother transitions */
+        }
+
+        body {
+            background: #f9f9f9; /* Light gray background */
+        }
+
+        /* Header Styles */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1); /* Deeper shadow */
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 0.5rem 0; /* Reduced padding */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .logo {
+            font-size: 2rem; /* Larger logo */
+            font-weight: bold;
+            color: #e94b7c;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Subtle text shadow */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #e94b7c;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 5% 80px; /* Adjusted padding */
+            background: linear-gradient(45deg, #ffe8f0, #f9f9f9);
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Improved alignment */
+            gap: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #777;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-button {
+            background: #e94b7c;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* More pronounced shadow */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .hero-image {
+            width: 50%; /* Adjusted width */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Enhanced shadow */
+        }
+
+        /* Product Grid */
+        .products {
+            padding: 5rem 5%;
+        }
+
+        .products h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider cards */
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px; /* Adjusted height */
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.4rem;
+            color: #444;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-price {
+            color: #e94b7c;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .add-to-cart {
+            background: #fff;
+            color: #e94b7c;
+            border: 2px solid #e94b7c;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background: #e94b7c;
+            color: white;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #2d2d2d;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 5% 60px;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-image {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FashionHub</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#cart">Cart</a>
+                <a href="#profile">Profile</a>
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">
+                <i class="fa fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Step Into Style With Our Exclusive Collection</h1>
+            <p>Discover the latest trends in fashion with our new arrivals. Elevate your wardrobe with our curated selection and enjoy up to 50% off on selected items.</p>
+            <a href="#shop" class="cta-button">Shop Now</a>
+        </div>
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Fashion Model" class="hero-image">
+    </section>
+
+    <section class="products">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Popular Products</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1523381294911-8cdfc3d53b2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Designer Dress" class="product-image">
+                <div class="product-info">
+                    <h3>Designer Dress</h3>
+                    <p class="product-price">$89.99</p>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1592078615290-0afe32b84c9f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80" alt="Summer Hat" class="product-image">
+                <div class="product-info">
+                    <h3>Summer Hat</h3>
+                    <p class="product-price">$29.99</p>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
+             <!-- Product 3 -->
+             <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf7c6ca52c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Leather Bag" class="product-image">
+                <div class="product-info">
+                    <h3>Leather Bag</h3>
+                    <p class="product-price">$129.99</p>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1585314060184-9b885c411762?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Sunglasses" class="product-image">
+                <div class="product-info">
+                    <h3>Sunglasses</h3>
+                    <p class="product-price">$49.99</p>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
+
+
+            <!-- Add more products as needed -->
+        </div>
+    </section>
+
+    <footer style="background: #2d2d2d; color: white; padding: 2rem 5%; text-align: center;">
+        <p>© 2024 FashionHub. All rights reserved</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
